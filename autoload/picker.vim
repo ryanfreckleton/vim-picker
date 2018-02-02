@@ -241,6 +241,28 @@ function! picker#CheckIsString(variable, name) abort
     endif
 endfunction
 
+function! picker#Picker(list_command, vim_command, escape_filename) abort
+    " Pipe the output of the specified shell command to the fuzzy selector,
+    " and pass the line selected by the user as a single argument to the
+    " specified Vim command.
+    "
+    " Parameters
+    " ----------
+    " list_command : String
+    "     Shell command to generate list user will choose from.
+    " vim_command : String
+    "     Vim command which will be called with the user's selection as a
+    "     single argument.
+    " escape_filename : Number
+    "     If non-zero, escape the user's selection for usage as a filename
+    "     before invoking the Vim command.
+    if a:escape_filename
+        call s:PickFile(a:list_command, a:vim_command)
+    else
+        call s:PickString(a:list_command, a:vim_command)
+    endif
+endfunction
+
 function! picker#Edit() abort
     " Run fuzzy selector to choose a file and call edit on it.
     call s:PickFile(s:ListFilesCommand(), 'edit')
