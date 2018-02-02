@@ -146,6 +146,24 @@ Neovim, set `g:picker_height` in your vimrc. The default is 10 lines:
 let g:picker_height = 10
 ```
 
+## Functions
+
+### `picker#Picker({list_command}, {vim_command}, {escape_filename})`
+
+Pipe the output of a shell shell command to the fuzzy selector, and pass the
+line selected by the user as a single argument to a Vim command. This allows
+adding fuzzy selection to arbitrary Vim functions with arbitrary input lists.
+
+`{list_command}` is a String specifying the shell command to generate list user
+will choose from.
+
+`{vim_command}` is a String specifying the Vim command which will be called
+with the user's selection as a single argument.
+
+`{escape_filename}` is a Number, which when non-zero causes the user's
+selection to be escaped for usage as a filename before invoking the Vim
+command.
+
 ## Copyright
 
 Copyright © 2016-2018 [Scott Stevenson].
